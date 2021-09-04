@@ -5,33 +5,32 @@ export const defaultState = {
   step: 1,
 };
 
+const handlers = {
+  [ACTION_TYPES.INCREMENT]: (state, action) => ({
+    ...state,
+    value: state.value + state.step,
+  }),
+  [ACTION_TYPES.DECREMENT]: (state, action) => ({
+    ...state,
+    value: state.value - state.step,
+  }),
+  [ACTION_TYPES.SET_STEP]: (state, action) => {
+    const { payload: { step } } = action;
+    return {
+      ...state,
+      step,
+    };
+  },
+  [ACTION_TYPES.RESET]: (state, action) => {
+    const { payload: { initialState } } = action;
+    return initialState;
+  },
+};
+
 export const reducer = (state, action) => {
   const { type } = action;
-  switch (type) {
-    case ACTION_TYPES.INCREMENT: {
-      return {
-        ...state,
-        value: state.value + state.step,
-      };
-    }
-    case ACTION_TYPES.DECREMENT: {
-      return {
-        ...state,
-        value: state.value - state.step,
-      };
-    }
-    case ACTION_TYPES.SET_STEP: {
-      const { payload: { step } } = action;
-      return {
-        ...state,
-        step,
-      };
-    }
-    case ACTION_TYPES.RESET: {
-      const { payload: { initialState } } = action;
-      return initialState;
-    }
-    default:
-      return state;
+  if (type in handlers) {
+    return handlers[type](state, action);
   }
+  return state;
 };
