@@ -1,12 +1,13 @@
-import {useReducer} from 'react';
+import {useContext, useReducer} from 'react';
 import {defaultState, reducer} from './reducer';
 import {addAction, decrementAction, removeAction, incrementAction} from './actions';
+import {GoodsContext} from '../../providers/GoodsProvider';
 
 export const useBasket = () => {
-    const [state, dispatch] = useReducer(reducer, defaultState);
+    const [state, dispatch] = useContext(GoodsContext);
 
     return [
-        state, {
+        state.basket, {
             add: (goodId) => dispatch(addAction(goodId)),
             remove: (goodId) => dispatch(removeAction(goodId)),
             increment: (goodId) => dispatch(incrementAction(goodId)),

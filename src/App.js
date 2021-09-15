@@ -4,6 +4,7 @@ import {BasketModalProvider} from './providers/BasketModalProvider';
 import {GoodsProvider} from './providers/GoodsProvider';
 import {PageHeader} from './components/PageHeader';
 import {GoodsList} from './components/GoodsList';
+import {Basket} from './components/Basket';
 
 const containerStyle = {
     display: 'flex',
@@ -19,6 +20,9 @@ function App() {
             <GoodsProvider>
                 <PageHeader />
                 <GoodsList />
+                <hr/>
+                <hr/>
+                <Basket />
             </GoodsProvider>
         </BasketModalProvider>
     );

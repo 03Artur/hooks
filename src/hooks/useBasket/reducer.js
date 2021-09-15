@@ -26,6 +26,10 @@ export const defaultState = {
 
 const handlers = {
     [ACTION_TYPES.ADD_GOODS_TO_BUCKET]: (state, action) => {
+        console.log({
+            state,
+            action,
+        });
         const {payload: {goodId}} = action;
         const {goods, basket} = state;
         const goodIndex = goods.findIndex(({id}) => id === goodId);
@@ -39,6 +43,7 @@ const handlers = {
         newGoods[goodIndex] = {
             ...goods[goodIndex],
             count: goods[goodIndex].count - 1,
+            isInBasket: true,
         };
         const newBasket = [
             ...basket,
